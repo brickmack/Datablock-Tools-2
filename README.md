@@ -16,6 +16,10 @@ All datablock tools can be found under Object -> Datablock Tools.
 
 ## Changelog
 
+### 2.2
+
+* Update for Blender 2.80 API. Still compatible with 2.7x
+
 ### 2.1
 
 * Fixed fatal bug with image datablock clean on objects with incomplete unwrapping

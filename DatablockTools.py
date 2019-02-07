@@ -1,8 +1,8 @@
 bl_info = {
 	"name": "Datablock Tools",
 	"author": "Mackenzie Crawford, Vitor Balbio",
-	"version": (2, 1),
-	"blender": (2, 79, 0),
+	"version": (2, 2),
+	"blender": (2, 80, 0),
 	"location": "View3D > Object > Datablock Tools",
 	"description": "Some tools to handle datablocks",
 	"warning": "",
@@ -118,22 +118,19 @@ def draw_item(self, context):
 	layout = self.layout
 	layout.menu(DatablockToolsMenu.bl_idname)
 
-def register():
-	bpy.utils.register_class(CleanMaterialsOP)
-	bpy.utils.register_class(RemoveAllMaterialsOP)
-	bpy.utils.register_class(CleanImagesOP)
-	bpy.utils.register_class(SetInstanceOP)
-	bpy.utils.register_class(DatablockToolsMenu)
+classes = (CleanMaterialsOP, RemoveAllMaterialsOP, CleanImagesOP, SetInstanceOP, DatablockToolsMenu)
 
-	# lets add ourselves to the main header
+def register():
+	from bpy.utils import register_class
+	for cls in classes:
+		register_class(cls)
+
 	bpy.types.VIEW3D_MT_object.append(draw_item)
 
 def unregister():
-	bpy.utils.unregister_class(CleanMaterialsOP)
-	bpy.utils.unregister_class(RemoveAllMaterialsOP)
-	bpy.utils.register_class(CleanImagesOP)
-	bpy.utils.unregister_class(SetInstanceOP)
-	bpy.utils.unregister_class(DatablockToolsMenu)
+	from bpy.utils import unregister_class
+	for cls in reverse(classes):
+		unregister_class(cls)
 
 	bpy.types.VIEW3D_MT_object.remove(draw_item)
 
