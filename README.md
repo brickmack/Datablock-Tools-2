@@ -1,5 +1,5 @@
 # Datablock-Tools-2
-Updated version of Datablock Tools for Blender https://blenderartists.org/forum/showthread.php?320593-Datablock-Tools Which is apparently no longer being maintained.
+Updated version of Datablock Tools for Blender https://blenderartists.org/forum/showthread.php?320593-Datablock-Tools
 
 Datablock Tools provides an easy way to remove duplicated material or UV image datablocks ("image.png.001", etc), typically created when copy-pasting objects. This reduces memory footprint and also makes editing materials a lot easier.
 
@@ -15,6 +15,10 @@ All datablock tools can be found under Object -> Datablock Tools.
 * **Set As Instance:** Converts all *selected* objects into instances of the *active* object. Any change to the geometry or materials of a single instance will affect all instances of the object.
 
 ## Changelog
+
+### 2.2.1
+
+* Remove "set as instance" tool. Blender includes an equivalent tool built-in anyway, no point duplicating code
 
 ### 2.2
 

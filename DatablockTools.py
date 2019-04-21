@@ -1,7 +1,7 @@
 bl_info = {
 	"name": "Datablock Tools",
 	"author": "Mackenzie Crawford, Vitor Balbio",
-	"version": (2, 2),
+	"version": (2, 2, 1),
 	"blender": (2, 80, 0),
 	"location": "View3D > Object > Datablock Tools",
 	"description": "Some tools to handle datablocks",
@@ -10,7 +10,6 @@ bl_info = {
 	"category": "3D View"}
 	
 import bpy
-import os
 import re
 
 class CleanImagesOP(bpy.types.Operator):
@@ -87,21 +86,6 @@ class RemoveAllMaterialsOP(bpy.types.Operator):
 				bpy.ops.object.material_slot_remove({'object': obj})
 		return {'FINISHED'}
 
-class SetInstanceOP(bpy.types.Operator):
-	#set all selected objects as instance of active object
-	bl_idname = "object.set_instance"
-	bl_label = "Set as Instance"
-
-	@classmethod
-	def poll(cls, context):
-		return ((context.selected_objects is not None) and (context.active_object is not None))
-
-	def execute(self, context):
-		active_obj = bpy.context.active_object
-		for sel_obj in bpy.context.selected_objects:
-			sel_obj.data = active_obj.data
-		return {'FINISHED'}
-
 class DatablockToolsMenu(bpy.types.Menu):
 	bl_label = "Datablock Tools"
 	bl_idname = "VIEW_MT_datablock_tools"
@@ -118,7 +102,7 @@ def draw_item(self, context):
 	layout = self.layout
 	layout.menu(DatablockToolsMenu.bl_idname)
 
-classes = (CleanMaterialsOP, RemoveAllMaterialsOP, CleanImagesOP, SetInstanceOP, DatablockToolsMenu)
+classes = (CleanMaterialsOP, RemoveAllMaterialsOP, CleanImagesOP, DatablockToolsMenu)
 
 def register():
 	from bpy.utils import register_class
